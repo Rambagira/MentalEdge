@@ -20,17 +20,24 @@
         .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 40px; }
         .card { background: var(--white); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease; }
         .card:hover { transform: translateY(-5px); }
-        .hero { padding: 60px; background: linear-gradient(rgba(0, 91, 150, 0.8), rgba(0, 78, 128, 0.8)), url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?ixlib=rb-4.0.3&auto=format&fit=crop&w=1468&q=80'); background-size: cover; background-position: center; color: var(--white); margin-bottom: 40px; }
+        
+        /* Hero Image - using a reliable ID */
+        .hero { padding: 60px; background: linear-gradient(rgba(0, 91, 150, 0.9), rgba(0, 78, 128, 0.9)), url('https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=1000'); background-size: cover; background-position: center; color: var(--white); margin-bottom: 40px; }
+        
         .hero h1 { margin-top: 0; font-size: 2.5rem; }
         .hero p { font-size: 1.2rem; opacity: 0.95; max-width: 600px; }
+        .btn-hero { display: inline-block; background: var(--accent-color); color: var(--white); padding: 12px 30px; border-radius: 30px; margin-top: 20px; font-weight: bold; }
+        
+        /* Grid */
         .article-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .card-thumbnail { width: 100%; height: 200px; object-fit: cover; display: block; }
         .article-content { padding: 25px; }
         .article-content h3 { margin-top: 0; color: var(--primary-color); font-size: 1.3rem; }
         .read-more { color: var(--accent-color); font-weight: bold; margin-top: 10px; display: inline-block; }
+        
+        /* Sidebar */
         .sidebar-widget { padding: 30px; }
         .sidebar-widget h4 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 20px; }
-        .sidebar-widget ul { list-style: none; padding: 0; margin: 0; }
         .sidebar-widget li a { display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: var(--text-light); font-weight: 500; }
         .sidebar-widget li a:hover { color: var(--accent-color); padding-left: 5px; }
         footer { background: var(--primary-color); color: rgba(255,255,255,0.8); text-align: center; padding: 30px; margin-top: 60px; }
@@ -55,13 +62,14 @@
             <section class="hero card">
                 <h1>Unlock Your Full Potential.</h1>
                 <p>Ten actionable guides to upgrade your brain, sleep deeper, and learn faster.</p>
+                <a href="#guides" class="btn-hero">Start Reading</a>
             </section>
 
-            <h2 style="color: var(--primary-color); margin-bottom: 25px;">Latest Guides</h2>
+            <h2 id="guides" style="color: var(--primary-color); margin-bottom: 25px;">Latest Guides</h2>
             <div class="article-grid">
                 
                 <div class="card">
-                    <img src="https://unsplash.com/photos/woman-sleeping-on-bed-under-blankets-rUc9hVE-L-E" alt="Sleep" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" alt="Cozy Bedroom" class="card-thumbnail">
                     <div class="article-content">
                         <h3>Sleep Your Way to Genius</h3>
                         <p>Why 6 hours isn't enough and how to structure your night for maximum cognitive recovery.</p>
@@ -70,7 +78,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Nature" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=600" alt="Nature" class="card-thumbnail">
                     <div class="article-content">
                         <h3>The Dopamine Detox</h3>
                         <p>Addicted to your phone? Here is how to reset your brain's reward system in 24 hours.</p>
@@ -79,7 +87,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Morning Coffee" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600" alt="Morning Coffee" class="card-thumbnail">
                     <div class="article-content">
                         <h3>The 5 A.M. Blueprint</h3>
                         <p>How the world's most productive people start their day (and how you can too).</p>
@@ -88,7 +96,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brain Art" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600" alt="Brain Art" class="card-thumbnail">
                     <div class="article-content">
                         <h3>Rewire Your Brain</h3>
                         <p>Understanding neuroplasticity: How to learn new skills at any age.</p>
@@ -97,7 +105,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Books" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600" alt="Books" class="card-thumbnail">
                     <div class="article-content">
                         <h3>Learn 2x Faster</h3>
                         <p>Simple speed-reading techniques that actually work without sacrificing comprehension.</p>
@@ -106,7 +114,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Relax" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?w=600" alt="Relax" class="card-thumbnail">
                     <div class="article-content">
                         <h3>The Burnout Antidote</h3>
                         <p>Recognizing the signs of mental exhaustion and practical steps to recover.</p>
@@ -115,7 +123,7 @@
                 </div>
 
                  <div class="card">
-                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Water" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600" alt="Water" class="card-thumbnail">
                     <div class="article-content">
                         <h3>Hydration & IQ</h3>
                         <p>The surprising link between drinking water and your ability to solve complex problems.</p>
@@ -124,7 +132,7 @@
                 </div>
 
                 <div class="card">
-                    <img src="https://images.unsplash.com/photo-1516534775068-58734529072b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Focus" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600" alt="Office Desk" class="card-thumbnail">
                     <div class="article-content">
                         <h3>The 25-Minute Focus Hack</h3>
                         <a href="focus-hack.html" class="read-more">Read Guide &rarr;</a>
@@ -132,7 +140,7 @@
                 </div>
                 
                  <div class="card">
-                    <img src="https://images.unsplash.com/photo-1490474504059-bf2e5366122a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Healthy brain food" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" alt="Healthy Food" class="card-thumbnail">
                     <div class="article-content">
                         <h3>3 Foods That Boost Memory</h3>
                         <a href="memory-foods.html" class="read-more">Read Guide &rarr;</a>
@@ -140,7 +148,7 @@
                 </div>
 
                  <div class="card">
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Meditate" class="card-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600" alt="Meditate" class="card-thumbnail">
                     <div class="article-content">
                         <h3>Micro-Meditation</h3>
                         <a href="micro-meditation.html" class="read-more">Read Guide &rarr;</a>
@@ -167,5 +175,4 @@
         <p><small><a href="privacy.html">Privacy Policy</a></small></p>
     </footer>
 </body>
-
 </html>
