@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Brain Fog Detected | MentalEdge</title>
+    <style>
+        /* --- SAME CSS AS YOUR OTHER PAGES --- */
+        :root { --primary-color: #005b96; --accent-color: #4db6ac; --text-dark: #2d3748; --text-light: #718096; --bg-light: #f9fbfd; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); text-decoration: none; } 
+        .logo span { color: var(--accent-color); }
+        
+        /* 404 Specific Styles */
+        .error-card { 
+            background: var(--white); 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            padding: 60px 40px; 
+            text-align: center; 
+            margin-top: 60px; 
+        }
+        
+        .error-image {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary-color); font-size: 3rem; margin: 0; }
+        h2 { color: var(--accent-color); margin-top: 10px; }
+        p { font-size: 1.2rem; color: var(--text-light); max-width: 600px; margin: 20px auto; }
+        
+        .btn-home { 
+            display: inline-block; 
+            background: var(--primary-color); 
+            color: var(--white); 
+            padding: 15px 40px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        .btn-home:hover { transform: scale(1.05); background-color: #004e80; }
+
+        footer { background: var(--primary-color); color: rgba(255,255,255,0.8); text-align: center; padding: 30px; margin-top: 60px; }
+        footer a { color: var(--accent-color); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Mental<span>Edge</span></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <main class="error-card">
+            <img src="https://images.unsplash.com/photo-1446729515325-1efc39da815c?w=800" alt="Foggy path" class="error-image">
+            
+            <h1>404</h1>
+            <h2>Brain Fog Detected</h2>
+            <p>It seems you've wandered into a part of the mind that doesn't exist. Don't worry, it happens to the best of us.</p>
+            
+            <a href="index.html" class="btn-home">Get Back on Track</a>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MentalEdge.</p>
+        <p><small><a href="privacy.html">Privacy Policy</a></small></p>
+    </footer>
+
+</body>
+</html>
