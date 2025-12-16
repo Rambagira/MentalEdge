@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro-Meditation | MentalEdge</title>
+    <style>
+        /* CORE STYLES */
+        :root { --primary-color: #005b96; --accent-color: #4db6ac; --text-dark: #2d3748; --text-light: #718096; --bg-light: #f9fbfd; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.8; color: var(--text-dark); background-color: var(--bg-light); }
+        h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
+        a { text-decoration: none; transition: color 0.3s ease; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; position: relative; z-index: 10; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); }
+        .logo span { color: var(--accent-color); }
+        .nav-links a { margin-left: 25px; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent-color); }
+        .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 40px; }
+        .card { background: var(--white); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1); overflow: hidden; }
+        .article-body { padding: 50px; }
+        .article-header { margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px; }
+        .article-header h1 { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 15px; }
+        .article-meta { color: var(--text-light); font-weight: 500; font-size: 0.9rem; }
+        .article-content h2 { margin-top: 40px; color: var(--text-dark); font-size: 1.8rem; }
+        .article-content p, .article-content li { font-size: 1.1rem; color: #4a5568; }
+        .article-content ul { padding-left: 20px; }
+        .article-content li { margin-bottom: 15px; }
+        .technique-box { background: linear-gradient(to right, #e3f2fd, #f0f7ff); padding: 35px; border-left: 6px solid #2196f3; margin: 35px 0; border-radius: 12px; box-shadow: 0 4px 10px rgba(33, 150, 243, 0.1); }
+        .technique-box h3 { margin-top: 0; color: #0d47a1; font-size: 1.4rem; }
+
+        /* NEW CSS FOR FEATURED IMAGE */
+        .featured-image { width: 100%; max-height: 450px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; }
+
+        .sidebar-widget { padding: 30px; }
+        .sidebar-widget h4 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 20px; }
+        .sidebar-widget ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar-widget li a { display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: var(--text-light); font-weight: 500; }
+        .sidebar-widget li a:hover { color: var(--accent-color); padding-left: 5px; }
+        footer { background: var(--primary-color); color: rgba(255,255,255,0.8); text-align: center; padding: 30px; margin-top: 60px; }
+        footer a { color: var(--accent-color); }
+        @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } .article-body { padding: 30px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Mental<span>Edge</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#">Topics</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container main-layout">
+        <main class="card article-body">
+            <img src="https://images.unsplash.com/photo-1528319725582-ddc096101511?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Calm stacked stones near water" class="featured-image">
+
+            <div class="article-header">
+                <h1>Micro-Meditation: Peace in 60 Seconds</h1>
+                <div class="article-meta">Published by Editor | 3 Min Read | Category: Calm</div>
+            </div>
+
+            <div class="article-content">
+                <p>"I don't have time to meditate." It's the most common excuse. But what if you didn't need 30 minutes in a quiet room with incense burning? What if you could reset your nervous system while sitting at your office desk?</p>
+                <p>Welcome to <strong>Micro-Meditation</strong>.</p>
+
+                <h2>Technique 1: Box Breathing (The Navy SEAL Method)</h2>
+                <p>This technique is used by elite soldiers to remain calm in high-stress situations. It physically forces your heart rate to slow down.</p>
+                
+                <div class="technique-box">
+                    <h3>How to do it:</h3>
+                    <ul>
+                        <li><strong>Inhale</strong> through your nose for 4 seconds.</li>
+                        <li><strong>Hold</strong> that breath for 4 seconds.</li>
+                        <li><strong>Exhale</strong> through your mouth for 4 seconds.</li>
+                        <li><strong>Hold</strong> empty lungs for 4 seconds.</li>
+                    </ul>
+                    <p><em>Repeat this cycle just 3 times.</em></p>
+                </div>
+
+                <h2>Technique 2: The "5-4-3-2-1" Grounding</h2>
+                <p>If you feel anxiety spiking, this method forces your brain to switch from "panic mode" (internal) to "observation mode" (external).</p>
+                <ul>
+                    <li>Identify <strong>5</strong> things you can see.</li>
+                    <li>Identify <strong>4</strong> things you can touch.</li>
+                    <li>Identify <strong>3</strong> things you can hear.</li>
+                    <li>Identify <strong>2</strong> things you can smell.</li>
+                    <li>Identify <strong>1</strong> thing you can taste.</li>
+                </ul>
+
+                <h2>Start Small</h2>
+                <p>Don't aim for perfection. Aim for consistency. Doing one minute of breathing today is infinitely better than planning to do an hour "someday."</p>
+            </div>
+            
+            <a href="index.html" style="display:inline-block; margin-top:40px; font-weight:bold; color: var(--accent-color);">&larr; Back to Home</a>
+        </main>
+
+        <aside>
+            <div class="card sidebar-widget">
+                <h4>Read Next</h4>
+                <ul>
+                    <li><a href="focus-hack.html">The 25-Minute Focus Hack</a></li>
+                    <li><a href="memory-foods.html">3 Foods That Boost Memory</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 MentalEdge.</p>
+        <p><small><a href="privacy.html">Privacy Policy</a></small></p>
+    </footer>
+</body>
+</html>

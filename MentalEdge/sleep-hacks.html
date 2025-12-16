@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Science | MentalEdge</title>
+    <style>
+        :root { --primary-color: #005b96; --accent-color: #4db6ac; --text-dark: #2d3748; --text-light: #4a5568; --bg-light: #f9fbfd; --white: #ffffff; }
+        body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; line-height: 1.8; color: var(--text-dark); background: var(--bg-light); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        header { background: var(--white); padding: 1rem 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); text-decoration: none; } .logo span { color: var(--accent-color); }
+        .main-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 40px; }
+        .card { background: var(--white); border-radius: 12px; padding: 50px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .featured-image { width: 100%; max-height: 450px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; }
+        h1 { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 15px; }
+        h2 { color: var(--text-dark); margin-top: 40px; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+        p, li { font-size: 1.1rem; color: var(--text-light); margin-bottom: 20px; }
+        .tip-box { background: #e0f2f1; padding: 25px; border-radius: 8px; border-left: 5px solid #009688; margin: 30px 0; }
+        .sidebar-link { display: block; padding: 15px 0; border-bottom: 1px solid #eee; color: var(--text-light); text-decoration: none; font-weight: 600; }
+        .sidebar-link:hover { color: var(--accent-color); padding-left: 5px; transition: 0.3s; }
+        footer { background: var(--primary-color); color: #fff; text-align: center; padding: 30px; margin-top: 50px; }
+        @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } .card { padding: 25px; } }
+    </style>
+</head>
+<body>
+    <header><div class="nav-container"><a href="index.html" class="logo">Mental<span>Edge</span></a></div></header>
+    <div class="container main-layout">
+        <main class="card">
+            <img src="https://images.unsplash.com/photo-1541781777631-fa0511bad421?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" alt="Person sleeping deeply" class="featured-image">
+            
+            <h1>Sleep Your Way to Genius: The Science of Recovery</h1>
+            <p>We live in a culture that treats sleep deprivation as a badge of honor. "I'll sleep when I'm dead," they say. The science, however, suggests that if you don't sleep, you will get there much faster.</p>
+            <p>Sleep is not a passive state where your body shuts down. It is an active metabolic state where your brain washes away toxins (specifically beta-amyloid) that accumulate during the day. Without this "wash cycle," your cognitive performance crashes.</p>
+
+            <h2>The 90-Minute Cycle Rule</h2>
+            <p>Your sleep isn't one long block. It occurs in cycles of roughly 90 minutes, moving from light sleep to deep sleep to REM (Rapid Eye Movement). Waking up in the middle of a deep sleep cycle causes "sleep inertia"—that heavy, groggy feeling.</p>
+            <ul>
+                <li><strong>The Strategy:</strong> Aim for multiples of 90 minutes.</li>
+                <li>7.5 hours (5 cycles) is often better than 8 hours (waking up mid-cycle).</li>
+                <li>9 hours (6 cycles) is the gold standard for athletes and learners.</li>
+            </ul>
+
+            <h2>Temperature is Key</h2>
+            <p>Your body needs to drop its core temperature by about 2-3 degrees Fahrenheit to initiate sleep. This is why it is so hard to sleep in a hot room.</p>
+            <p>Keep your bedroom cool (around 18°C or 65°F). If you cannot control the room temperature, take a hot shower before bed. When you step out of the hot shower, your body rapidly dumps heat, signaling to your brain that it is time to sleep.</p>
+
+            <div class="tip-box">
+                <strong>Pro Tip: The Caffeine Curfew</strong><br>
+                Caffeine has a "half-life" of about 5-6 hours. If you drink a coffee at 4 PM, 50% of that caffeine is still in your brain at 10 PM. Stop all caffeine intake 10 hours before your planned bedtime.
+            </div>
+
+            <a href="index.html" style="display:inline-block; margin-top:20px; font-weight:bold; color: var(--primary-color);">&larr; Back to Home</a>
+        </main>
+        <aside>
+            <div class="card" style="padding: 30px;">
+                <h4 style="margin-top:0; color:var(--primary-color);">Read Next</h4>
+                <a href="morning-habit.html" class="sidebar-link">The 5 A.M. Blueprint</a>
+                <a href="digital-detox.html" class="sidebar-link">Dopamine Detox</a>
+                <a href="water-focus.html" class="sidebar-link">Hydration & IQ</a>
+            </div>
+        </aside>
+    </div>
+    <footer><p>&copy; 2023 MentalEdge.</p></footer>
+</body>
+</html>
