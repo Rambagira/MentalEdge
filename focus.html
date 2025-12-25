@@ -6,24 +6,30 @@
     <title>Focus & Productivity | MentalEdge</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
     <style>
-        :root { --primary-color: #005b96; --accent-color: #4db6ac; --text-dark: #2d3748; --text-light: #718096; --bg-light: #f9fbfd; --white: #ffffff; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
-        .logo span { color: var(--accent-color); }
-        .nav-links a { margin-left: 25px; color: var(--text-dark); text-decoration: none; font-weight: 600; }
-        .nav-links a:hover { color: var(--accent-color); }
-        .article-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: var(--white); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); overflow: hidden; transition: transform 0.3s ease; }
-        .card:hover { transform: translateY(-5px); }
-        .card-thumbnail { width: 100%; height: 200px; object-fit: cover; }
-        .article-content { padding: 25px; }
-        .article-content h3 { margin-top: 0; color: var(--primary-color); }
-        .read-more { color: var(--accent-color); font-weight: bold; text-decoration: none; }
-        footer { background: var(--primary-color); color: #fff; text-align: center; padding: 40px; margin-top: 60px; }
-        footer a { color: var(--accent-color); text-decoration: none; }
+        :root { --primary: #0f172a; --accent: #0ea5e9; --surface: #ffffff; --background: #f8fafc; --text-main: #334155; --text-light: #64748b; --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Inter', system-ui, sans-serif; background: var(--background); color: var(--text-main); line-height: 1.6; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e2e8f0; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-weight: 600; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s; border: 1px solid #f1f5f9; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin: 0 0 10px 0; }
+        .card-text { font-size: 0.95rem; color: var(--text-light); margin-bottom: 20px; flex-grow: 1; }
+        .read-link { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; margin-top: auto; }
+        .hero-mini { text-align: center; padding: 60px 20px; background: var(--primary); color: white; border-radius: 12px; margin-bottom: 40px; }
+        footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 60px 20px; margin-top: 80px; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .nav-container { flex-direction: column; gap: 15px; } }
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9666115145226151" crossorigin="anonymous"></script>
 </head>
@@ -31,28 +37,34 @@
     <header>
         <div class="nav-container">
             <a href="index.html" class="logo">Mental<span>Edge</span></a>
-            <nav class="nav-links"><a href="focus.html" style="color: var(--accent-color);">Focus</a><a href="memory.html">Memory</a><a href="sleep.html">Sleep</a></nav>
+            <nav class="nav-links">
+                <a href="focus.html" style="color: var(--accent);">Focus</a>
+                <a href="memory.html">Memory</a>
+                <a href="sleep.html">Sleep</a>
+            </nav>
         </div>
     </header>
 
     <div class="container">
-        <h1 style="color: var(--primary-color); margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 15px;">Focus & Productivity</h1>
-        
-        <div class="article-grid">
-            <div class="card"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600" class="card-thumbnail"><div class="article-content"><h3>Monk Mode Protocol</h3><p>The nuclear option for massive productivity. Disappear for 30 days and win.</p><a href="monk-mode.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600" class="card-thumbnail"><div class="article-content"><h3>Deep Work Guide</h3><p>Stop drowning in shallow emails. Learn the skill of distraction-free focus.</p><a href="deep-work.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=600" class="card-thumbnail"><div class="article-content"><h3>The Two-Minute Rule</h3><p>Stop procrastinating on small tasks immediately. A GTD method.</p><a href="two-minute-rule.html" class="read-more">Read Guide &rarr;</a></div></div>
-            
-            <div class="card"><img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=600" class="card-thumbnail"><div class="article-content"><h3>Parkinson's Law</h3><p>Why giving yourself less time actually makes you work better.</p><a href="parkinsons-law.html" class="read-more">Read Guide &rarr;</a></div></div>
-            
-            <div class="card"><img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600" class="card-thumbnail"><div class="article-content"><h3>Eisenhower Matrix</h3><p>How US Presidents prioritize urgent vs important tasks.</p><a href="eisenhower-matrix.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600" class="card-thumbnail"><div class="article-content"><h3>The 80/20 Rule</h3><p>The Pareto Principle: Achieve more results by doing less work.</p><a href="80-20-rule.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=600" class="card-thumbnail"><div class="article-content"><h3>Enter the Flow State</h3><p>Trigger the "superman" state where work feels effortless.</p><a href="flow-state.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600" class="card-thumbnail"><div class="article-content"><h3>Digital Declutter</h3><p>Your messy desktop is killing your focus. The minimalist guide.</p><a href="digital-declutter.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=600" class="card-thumbnail"><div class="article-content"><h3>Dopamine Detox</h3><p>Addicted to your phone? Reset your brain's reward system.</p><a href="digital-detox.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600" class="card-thumbnail"><div class="article-content"><h3>25-Minute Hack</h3><p>The Pomodoro Technique: Trick your brain into enjoying boring tasks.</p><a href="focus-hack.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600" class="card-thumbnail"><div class="article-content"><h3>The 5 A.M. Blueprint</h3><p>Don't wake up by accident. The 60-minute routine used by high achievers.</p><a href="morning-habit.html" class="read-more">Read Guide &rarr;</a></div></div>
-            <div class="card"><img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600" class="card-thumbnail"><div class="article-content"><h3>Decision Fatigue</h3><p>Why successful people wear the same clothes every day.</p><a href="decision-fatigue.html" class="read-more">Read Guide &rarr;</a></div></div>
+        <div class="hero-mini">
+            <h1>Focus & Productivity</h1>
+            <p>Master your attention span and get more done in less time.</p>
+        </div>
+
+        <div class="grid">
+            <div class="card"><img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Monk Mode Protocol</h3><p class="card-text">The nuclear option for massive productivity.</p><a href="monk-mode.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Deep Work Guide</h3><p class="card-text">Stop drowning in shallow emails. Learn distraction-free focus.</p><a href="deep-work.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Enter the Flow State</h3><p class="card-text">Trigger the state where work feels effortless.</p><a href="flow-state.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=600" class="card-img"><div class="card-body"><h3 class="card-title">The Two-Minute Rule</h3><p class="card-text">Stop procrastinating on small tasks immediately.</p><a href="two-minute-rule.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1628254747021-59537f5c2255?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Parkinson's Law</h3><p class="card-text">Why giving yourself less time makes you work better.</p><a href="parkinsons-law.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Eisenhower Matrix</h3><p class="card-text">Prioritize urgent vs important tasks effectively.</p><a href="eisenhower-matrix.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600" class="card-img"><div class="card-body"><h3 class="card-title">The 80/20 Rule</h3><p class="card-text">Achieve more results by doing less work.</p><a href="80-20-rule.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Digital Declutter</h3><p class="card-text">Your messy desktop is killing your focus.</p><a href="digital-declutter.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Dopamine Detox</h3><p class="card-text">Reset your brain's reward system in 24 hours.</p><a href="digital-detox.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600" class="card-img"><div class="card-body"><h3 class="card-title">25-Minute Hack</h3><p>The Pomodoro Technique: Trick your brain into enjoying work.</p><a href="focus-hack.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600" class="card-img"><div class="card-body"><h3 class="card-title">5 A.M. Blueprint</h3><p>Don't wake up by accident. Win the morning.</p><a href="morning-habit.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600" class="card-img"><div class="card-body"><h3 class="card-title">Decision Fatigue</h3><p>Why successful people wear the same clothes.</p><a href="decision-fatigue.html" class="read-link">Read Article</a></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=600" class="card-img"><div class="card-body"><h3 class="card-title">The Zeigarnik Effect</h3><p>Why you can't relax until you finish a task.</p><a href="zeigarnik-effect.html" class="read-link">Read Article</a></div></div>
         </div>
     </div>
 
