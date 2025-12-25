@@ -6,47 +6,103 @@
     <title>MentalEdge | The Hub for Cognitive Performance</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
     <style>
-        /* --- MODERN CSS STYLES --- */
-        :root { --primary-color: #005b96; --accent-color: #4db6ac; --text-dark: #2d3748; --text-light: #718096; --bg-light: #f9fbfd; --white: #ffffff; }
-        body { margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.7; color: var(--text-dark); background-color: var(--bg-light); }
-        h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
-        a { text-decoration: none; transition: color 0.3s ease; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; position: relative; z-index: 10; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary-color); }
-        .logo span { color: var(--accent-color); }
-        .nav-links a { margin-left: 25px; color: var(--text-dark); font-weight: 600; font-size: 0.95rem; }
-        .nav-links a:hover { color: var(--accent-color); }
-        .main-layout { display: grid; grid-template-columns: 3fr 1fr; gap: 40px; margin-top: 40px; }
-        .card { background: var(--white); border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 10px 15px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease; }
-        .card:hover { transform: translateY(-5px); }
-        
-        .hero { padding: 80px 40px; background: linear-gradient(rgba(0, 91, 150, 0.9), rgba(0, 78, 128, 0.9)), url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1000'); background-size: cover; background-position: center; color: var(--white); margin-bottom: 40px; text-align: center; }
-        .hero h1 { margin-top: 0; font-size: 3rem; }
-        .hero p { font-size: 1.3rem; opacity: 0.95; max-width: 700px; margin: 20px auto; }
-        .btn-hero { display: inline-block; background: var(--accent-color); color: var(--white); padding: 15px 35px; border-radius: 30px; margin-top: 20px; font-weight: bold; font-size: 1.1rem; }
-        
-        /* Grid Layout for Articles */
-        .article-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card-thumbnail { width: 100%; height: 180px; object-fit: cover; display: block; }
-        .article-content { padding: 20px; }
-        .article-content h3 { margin-top: 0; color: var(--primary-color); font-size: 1.2rem; margin-bottom: 10px; }
-        .article-content p { font-size: 0.95rem; color: #555; line-height: 1.5; margin-bottom: 15px; } 
-        .read-more { color: var(--accent-color); font-weight: bold; margin-top: auto; display: inline-block; font-size: 0.9rem; }
-        
-        .sidebar-widget { padding: 30px; }
-        .sidebar-widget h4 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; margin-bottom: 20px; }
-        .sidebar-widget li a { display: block; padding: 12px 0; border-bottom: 1px solid #eee; color: var(--text-light); font-weight: 500; }
-        .sidebar-widget li a:hover { color: var(--accent-color); padding-left: 5px; }
-        footer { background: var(--primary-color); color: rgba(255,255,255,0.8); text-align: center; padding: 40px; margin-top: 60px; }
-        footer a { color: var(--accent-color); }
-        @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } .nav-container { flex-direction: column; } }
-    </style>
+        /* --- 1. RESET & VARIABLES --- */
+        :root {
+            --primary: #0f172a;
+            --accent: #0ea5e9;
+            --surface: #ffffff;
+            --background: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--background); color: var(--text-main); line-height: 1.6; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9666115145226151"
-     crossorigin="anonymous"></script>
-    
+        /* --- 2. NAVIGATION (Responsive) --- */
+        header { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid #e2e8f0; }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { font-weight: 600; font-size: 0.95rem; color: var(--text-main); }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- 3. HERO SECTION (Responsive) --- */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600');
+            background-size: cover; background-position: center;
+            color: white; padding: 80px 20px; text-align: center;
+        }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin: 0 0 20px 0; line-height: 1.1; font-weight: 800; }
+        .hero p { font-size: clamp(1rem, 2vw, 1.25rem); opacity: 0.9; max-width: 600px; margin: 0 auto 30px; font-weight: 300; }
+        .btn-main {
+            background: var(--accent); color: white; padding: 12px 30px; border-radius: 50px;
+            font-weight: 700; display: inline-block; box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4);
+        }
+        .btn-main:hover { transform: translateY(-2px); background: #0284c7; }
+
+        /* --- 4. LAYOUT & GRIDS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .section-header { border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; margin-bottom: 30px; }
+        .section-title { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 0; }
+
+        /* The Grid System - Automatically adjusts columns based on screen width */
+        .grid {
+            display: grid;
+            gap: 30px;
+            /* This is the magic responsive line: */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        /* Trending Section (Top 3 Visuals) */
+        .trending-grid {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            margin-bottom: 60px;
+        }
+
+        /* --- 5. CARDS --- */
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s; border: 1px solid #f1f5f9; display: flex; flex-direction: column; }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card-img { width: 100%; height: 200px; object-fit: cover; }
+        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin: 0 0 10px 0; }
+        .card-text { font-size: 0.95rem; color: var(--text-light); margin-bottom: 20px; flex-grow: 1; line-height: 1.5; }
+        .read-link { color: var(--accent); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; margin-top: auto; }
+
+        /* Trending Card Specifics */
+        .trending-card { position: relative; height: 350px; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .trending-bg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .trending-card:hover .trending-bg { transform: scale(1.05); }
+        .trending-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0; top: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 60%);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 25px;
+        }
+        .trending-title { color: white; font-size: 1.4rem; font-weight: 800; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .tag { background: var(--accent); color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; width: fit-content; margin-bottom: 10px; }
+
+        /* --- 6. FOOTER --- */
+        footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 60px 20px; margin-top: 80px; }
+        footer a { color: var(--accent); margin: 0 10px; }
+
+        /* --- 7. MOBILE OVERRIDES (Screens smaller than 768px) --- */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 15px; } /* Stack logo and menu */
+            .nav-links { gap: 20px; font-size: 1rem; }
+            .hero { padding: 60px 20px; }
+            .grid, .trending-grid { grid-template-columns: 1fr; } /* Force single column on phone */
+            .trending-card { height: 250px; } /* Shorter featured cards on mobile */
+        }
+    </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9666115145226151" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -61,362 +117,344 @@
         </div>
     </header>
 
-    <div class="container main-layout">
-        <main>
-            <section class="hero card">
-                <h1>Upgrade Your Mind.</h1>
-                <p>Welcome to the ultimate library of cognitive performance. Explore 35 science-backed guides to help you learn faster, focus deeper, and live better.</p>
-                <a href="monk-mode.html" class="btn-hero">Read: Monk Mode Protocol</a>
-            </section>
+    <section class="hero">
+        <h1>Unlock Your Brain's Potential</h1>
+        <p>Science-backed strategies to learn faster, focus deeper, and sleep better.</p>
+        <a href="monk-mode.html" class="btn-main">Start Here: Monk Mode</a>
+    </section>
 
-            <h2 id="library" style="color: var(--primary-color); margin-bottom: 25px; border-bottom: 2px solid #eee; padding-bottom: 10px;">The Full Library</h2>
-            <div class="article-grid">
-                
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=600" alt="Flow State" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Enter the Flow State</h3>
-                        <p>Trigger the "superman" state where work feels effortless and time vanishes.</p>
-                        <a href="flow-state.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600" alt="Deep Work" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Deep Work Guide</h3>
-                        <p>Stop drowning in shallow emails. Learn the skill of focus.</p>
-                        <a href="deep-work.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1516934024742-b461fba47600?w=600" alt="Habits" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Habit Stacking</h3>
-                        <p>The lazy way to build new habits without relying on willpower.</p>
-                        <a href="habit-stacking.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1531353826977-0941b4779a1c?w=600" alt="Person Napping" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Power Napping</h3>
-                        <p>How to sleep for exactly 20 minutes to wake up sharper, not groggier.</p>
-                        <a href="power-napping.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600" alt="Growth" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Growth Mindset</h3>
-                        <p>Talent is overrated. Discover the psychological switch that unlocks potential.</p>
-                        <a href="growth-mindset.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=600" alt="Stoic Statue" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Stoic Resilience</h3>
-                        <p>Ancient Greek tactics to remain calm and indestructible.</p>
-                        <a href="stoic-mind.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600" alt="Declutter" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Digital Declutter</h3>
-                        <p>Your messy desktop is killing your focus. The minimalist guide.</p>
-                        <a href="digital-declutter.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=600" alt="Fasting" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Intermittent Fasting</h3>
-                        <p>Why skipping breakfast might be the best thing for your brain.</p>
-                        <a href="intermittent-fasting.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600" alt="Headphones" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Music for Focus</h3>
-                        <p>Stop listening to lyrics. Use these sound frequencies (40Hz) instead.</p>
-                        <a href="music-focus.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600" alt="Journal" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Journaling for Clarity</h3>
-                        <p>Clear your mental RAM. Why writing by hand solves problems faster.</p>
-                        <a href="journaling-hacks.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" alt="Sleep" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Sleep Hacks</h3>
-                        <p>Why 8 hours isn't enough. Master the 90-minute cycle.</p>
-                        <a href="sleep-hacks.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=600" alt="Nature" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Dopamine Detox</h3>
-                        <p>Addicted to your phone? Reset your brain's reward system.</p>
-                        <a href="digital-detox.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600" alt="Morning" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>The 5 A.M. Blueprint</h3>
-                        <p>Don't wake up by accident. The 60-minute routine used by high achievers.</p>
-                        <a href="morning-habit.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600" alt="Brain" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Rewire Your Brain</h3>
-                        <p>You can change your brain structure at any age. Here is how.</p>
-                        <a href="neuro-rewire.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600" alt="Books" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Learn 2x Faster</h3>
-                        <p>The Feynman Technique: How to master complex topics in half the time.</p>
-                        <a href="speed-learning.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?w=600" alt="Relax" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>The Burnout Antidote</h3>
-                        <p>Why watching Netflix isn't actually resting (and what to do instead).</p>
-                        <a href="burnout-fix.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600" alt="Water" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Hydration & IQ</h3>
-                        <p>The 2% rule: How mild dehydration is silently destroying your attention.</p>
-                        <a href="water-focus.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600" alt="Focus" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>25-Minute Focus Hack</h3>
-                        <p>The Pomodoro Technique: How to trick your brain into enjoying boring tasks.</p>
-                        <a href="focus-hack.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" alt="Food" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>3 Brain Foods</h3>
-                        <p>Stop forgetting names. The 3 essential foods your brain needs.</p>
-                        <a href="memory-foods.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600" alt="Zen" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Micro-Meditation</h3>
-                        <p>No time to meditate? Use this Navy SEAL breathing technique.</p>
-                        <a href="micro-meditation.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600" alt="Monk Mode" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Monk Mode Protocol</h3>
-                        <p>The nuclear option for massive productivity. Disappear for 30 days.</p>
-                        <a href="monk-mode.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://plus.unsplash.com/premium_photo-1743885026132-6aa6f24b5396?w=600" alt="Blue Light" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Blue Light Trap</h3>
-                        <p>Why looking at your phone at night kills your sleep quality.</p>
-                        <a href="blue-light-science.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600" alt="Spaced Repetition" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Spaced Repetition</h3>
-                        <p>The secret algorithm for never forgetting what you learn.</p>
-                        <a href="spaced-repetition.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=600" alt="Two Minute Rule" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>The Two-Minute Rule</h3>
-                        <p>Stop procrastinating on small tasks immediately. A GTD method.</p>
-                        <a href="two-minute-rule.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1540914124281-342587941389?w=600" alt="Cold Therapy" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Cold Therapy</h3>
-                        <p>How cold water shocks your brain into alertness.</p>
-                        <a href="cold-therapy.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600" alt="Eisenhower Matrix" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Eisenhower Matrix</h3>
-                        <p>How US Presidents prioritize urgent vs important tasks.</p>
-                        <a href="eisenhower-matrix.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1628254747021-59537f5c2255?w=600" alt="Hourglass" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Parkinson's Law</h3>
-                        <p>Why giving yourself less time actually makes you work better.</p>
-                        <a href="parkinsons-law.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1623582854588-d60de57fa33f?w=600" alt="Imposter Syndrome" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Imposter Syndrome</h3>
-                        <p>Why high achievers feel like frauds, and how to use it.</p>
-                        <a href="imposter-syndrome.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=600" alt="Person Thinking" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>The Zeigarnik Effect</h3>
-                        <p>The psychology of why we can't relax until we finish a task.</p>
-                        <a href="zeigarnik-effect.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600" alt="Cognitive Biases" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>3 Cognitive Biases</h3>
-                        <p>Mental errors that are ruining your decisions.</p>
-                        <a href="cognitive-biases.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600" alt="Visualization" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Visualization Science</h3>
-                        <p>It's not magic. It's neuroscience. How athletes use rehearsal.</p>
-                        <a href="visualization-science.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600" alt="Posture" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Posture & Focus</h3>
-                        <p>Why sitting is the new smoking for your brain and IQ.</p>
-                        <a href="posture-focus.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600" alt="80/20 Rule" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>The 80/20 Rule</h3>
-                        <p>The Pareto Principle: Achieve more results by doing less.</p>
-                        <a href="80-20-rule.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600" alt="Decision Fatigue" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Decision Fatigue</h3>
-                        <p>Why successful people wear the same clothes every day.</p>
-                        <a href="decision-fatigue.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=600" alt="Active Reading" class="card-thumbnail">
-                    <div class="article-content">
-                        <h3>Active Reading</h3>
-                        <p>Stop consuming books. Start remembering them.</p>
-                        <a href="active-reading.html" class="read-more">Read Guide &rarr;</a>
-                    </div>
-                </div>
-
-            </div>
-        </main>
-
-        <aside>
-            <div class="card sidebar-widget">
-                <h4>Editors' Choice</h4>
-                <ul>
-                    <li><a href="monk-mode.html">Monk Mode Protocol</a></li>
-                    <li><a href="deep-work.html">Deep Work Strategy</a></li>
-                    <li><a href="digital-detox.html">Dopamine Detox</a></li>
-                    <li><a href="morning-habit.html">5 A.M. Blueprint</a></li>
-                    <li><a href="sleep-hacks.html">Sleep Hacks</a></li>
-                </ul>
-            </div>
+    <div class="container">
+        
+        <div class="section-header"><h2 class="section-title">Trending Now</h2></div>
+        <div class="trending-grid">
             
-            <div class="card sidebar-widget" style="margin-top: 30px; background: linear-gradient(135deg, var(--accent-color), #3da99f); color: white;">
-                <h4 style="color: white; border-color: rgba(255,255,255,0.3);">Daily Challenge</h4>
-                <p style="font-weight: 500;">Try the "Dopamine Detox" this Sunday. No phone for 24 hours. Reset your brain.</p>
+            <a href="monk-mode.html" class="trending-card">
+                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800" class="trending-bg" alt="Monk Mode">
+                <div class="trending-overlay">
+                    <span class="tag">Productivity</span>
+                    <h3 class="trending-title">The Monk Mode Protocol: Extreme Focus</h3>
+                </div>
+            </a>
+
+            <a href="flow-state.html" class="trending-card">
+                <img src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285?w=800" class="trending-bg" alt="Flow State">
+                <div class="trending-overlay">
+                    <span class="tag">Psychology</span>
+                    <h3 class="trending-title">How to Enter the Flow State on Command</h3>
+                </div>
+            </a>
+
+            <a href="blue-light-science.html" class="trending-card">
+                <img src="https://plus.unsplash.com/premium_photo-1743885026132-6aa6f24b5396?w=800" class="trending-bg" alt="Blue Light">
+                <div class="trending-overlay">
+                    <span class="tag">Sleep</span>
+                    <h3 class="trending-title">The Blue Light Trap: Protecting Your Sleep</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="section-header"><h2 class="section-title">The Knowledge Base</h2></div>
+        <div class="grid">
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600" class="card-img" alt="Deep Work">
+                <div class="card-body">
+                    <h3 class="card-title">Deep Work Guide</h3>
+                    <p class="card-text">Stop drowning in shallow emails. Learn the skill of distraction-free focus.</p>
+                    <a href="deep-work.html" class="read-link">Read Article &rarr;</a>
+                </div>
             </div>
-        </aside>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600" class="card-img" alt="Spaced Repetition">
+                <div class="card-body">
+                    <h3 class="card-title">Spaced Repetition</h3>
+                    <p class="card-text">The secret algorithm for never forgetting what you learn.</p>
+                    <a href="spaced-repetition.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1456406644174-8ddd4cd52a06?w=600" class="card-img" alt="Two Minute Rule">
+                <div class="card-body">
+                    <h3 class="card-title">The Two-Minute Rule</h3>
+                    <p class="card-text">Stop procrastinating on small tasks immediately.</p>
+                    <a href="two-minute-rule.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1540914124281-342587941389?w=600" class="card-img" alt="Cold Therapy">
+                <div class="card-body">
+                    <h3 class="card-title">Cold Therapy</h3>
+                    <p class="card-text">How cold water shocks your brain into alertness.</p>
+                    <a href="cold-therapy.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600" class="card-img" alt="Eisenhower Matrix">
+                <div class="card-body">
+                    <h3 class="card-title">Eisenhower Matrix</h3>
+                    <p class="card-text">How US Presidents prioritize urgent vs important tasks.</p>
+                    <a href="eisenhower-matrix.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?w=600" class="card-img" alt="Active Reading">
+                <div class="card-body">
+                    <h3 class="card-title">Active Reading</h3>
+                    <p class="card-text">Stop consuming books passively. Start remembering them.</p>
+                    <a href="active-reading.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1628254747021-59537f5c2255?w=600" class="card-img" alt="Parkinson's Law">
+                <div class="card-body">
+                    <h3 class="card-title">Parkinson's Law</h3>
+                    <p class="card-text">Why giving yourself less time actually makes you work better.</p>
+                    <a href="parkinsons-law.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1623582854588-d60de57fa33f?w=600" class="card-img" alt="Imposter Syndrome">
+                <div class="card-body">
+                    <h3 class="card-title">Imposter Syndrome</h3>
+                    <p class="card-text">Why high achievers feel like frauds, and how to fix it.</p>
+                    <a href="imposter-syndrome.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1494173853739-c21f58b16055?w=600" class="card-img" alt="Zeigarnik Effect">
+                <div class="card-body">
+                    <h3 class="card-title">The Zeigarnik Effect</h3>
+                    <p class="card-text">The psychology of why we can't relax until we finish a task.</p>
+                    <a href="zeigarnik-effect.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600" class="card-img" alt="Cognitive Biases">
+                <div class="card-body">
+                    <h3 class="card-title">3 Cognitive Biases</h3>
+                    <p class="card-text">Mental errors that are ruining your decisions.</p>
+                    <a href="cognitive-biases.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600" class="card-img" alt="Visualization">
+                <div class="card-body">
+                    <h3 class="card-title">Visualization Science</h3>
+                    <p>It's not magic. It's neuroscience. How athletes use rehearsal.</p>
+                    <a href="visualization-science.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600" class="card-img" alt="Posture">
+                <div class="card-body">
+                    <h3 class="card-title">Posture & Focus</h3>
+                    <p>Why sitting is the new smoking for your brain and IQ.</p>
+                    <a href="posture-focus.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600" class="card-img" alt="80/20 Rule">
+                <div class="card-body">
+                    <h3 class="card-title">The 80/20 Rule</h3>
+                    <p class="card-text">The Pareto Principle: Achieve more results by doing less.</p>
+                    <a href="80-20-rule.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600" class="card-img" alt="Decision Fatigue">
+                <div class="card-body">
+                    <h3 class="card-title">Decision Fatigue</h3>
+                    <p>Why successful people wear the same clothes every day.</p>
+                    <a href="decision-fatigue.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600" class="card-img" alt="Hydration">
+                <div class="card-body">
+                    <h3 class="card-title">Hydration & IQ</h3>
+                    <p>The 2% rule: How mild dehydration destroys your attention.</p>
+                    <a href="water-focus.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1516934024742-b461fba47600?w=600" class="card-img" alt="Habits">
+                <div class="card-body">
+                    <h3 class="card-title">Habit Stacking</h3>
+                    <p>The lazy way to build new habits without relying on willpower.</p>
+                    <a href="habit-stacking.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1531353826977-0941b4779a1c?w=600" class="card-img" alt="Power Napping">
+                <div class="card-body">
+                    <h3 class="card-title">Power Napping</h3>
+                    <p>How to sleep for exactly 20 minutes to wake up sharper.</p>
+                    <a href="power-napping.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=600" class="card-img" alt="Growth Mindset">
+                <div class="card-body">
+                    <h3 class="card-title">Growth Mindset</h3>
+                    <p>Talent is overrated. Discover the psychological switch.</p>
+                    <a href="growth-mindset.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=600" class="card-img" alt="Stoic Resilience">
+                <div class="card-body">
+                    <h3 class="card-title">Stoic Resilience</h3>
+                    <p>Ancient Greek tactics to remain calm and indestructible.</p>
+                    <a href="stoic-mind.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600" class="card-img" alt="Digital Declutter">
+                <div class="card-body">
+                    <h3 class="card-title">Digital Declutter</h3>
+                    <p>Your messy desktop is killing your focus. The minimalist guide.</p>
+                    <a href="digital-declutter.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=600" class="card-img" alt="Fasting">
+                <div class="card-body">
+                    <h3 class="card-title">Intermittent Fasting</h3>
+                    <p>Why skipping breakfast might be the best thing for your brain.</p>
+                    <a href="intermittent-fasting.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600" class="card-img" alt="Music Focus">
+                <div class="card-body">
+                    <h3 class="card-title">Music for Focus</h3>
+                    <p>Stop listening to lyrics. Use these sound frequencies (40Hz).</p>
+                    <a href="music-focus.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=600" class="card-img" alt="Journaling">
+                <div class="card-body">
+                    <h3 class="card-title">Journaling Hacks</h3>
+                    <p>Clear your mental RAM. Why writing by hand solves problems faster.</p>
+                    <a href="journaling-hacks.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=600" class="card-img" alt="Sleep Hacks">
+                <div class="card-body">
+                    <h3 class="card-title">Sleep Hacks</h3>
+                    <p>Why 8 hours isn't enough. Master the 90-minute cycle.</p>
+                    <a href="sleep-hacks.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?w=600" class="card-img" alt="Dopamine Detox">
+                <div class="card-body">
+                    <h3 class="card-title">Dopamine Detox</h3>
+                    <p>Addicted to your phone? Reset your brain's reward system.</p>
+                    <a href="digital-detox.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600" class="card-img" alt="Morning Blueprint">
+                <div class="card-body">
+                    <h3 class="card-title">5 A.M. Blueprint</h3>
+                    <p>Don't wake up by accident. The 60-minute routine for success.</p>
+                    <a href="morning-habit.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600" class="card-img" alt="Rewire Brain">
+                <div class="card-body">
+                    <h3 class="card-title">Rewire Your Brain</h3>
+                    <p>You can change your brain structure at any age. Here is how.</p>
+                    <a href="neuro-rewire.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600" class="card-img" alt="Learn Faster">
+                <div class="card-body">
+                    <h3 class="card-title">Learn 2x Faster</h3>
+                    <p>The Feynman Technique: How to master complex topics in half the time.</p>
+                    <a href="speed-learning.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?w=600" class="card-img" alt="Burnout">
+                <div class="card-body">
+                    <h3 class="card-title">The Burnout Antidote</h3>
+                    <p>Why watching Netflix isn't actually resting (and what to do instead).</p>
+                    <a href="burnout-fix.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=600" class="card-img" alt="Focus Hack">
+                <div class="card-body">
+                    <h3 class="card-title">25-Minute Hack</h3>
+                    <p>The Pomodoro Technique: Trick your brain into enjoying boring tasks.</p>
+                    <a href="focus-hack.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600" class="card-img" alt="Brain Foods">
+                <div class="card-body">
+                    <h3 class="card-title">3 Brain Foods</h3>
+                    <p>Stop forgetting names. The 3 essential foods your brain needs.</p>
+                    <a href="memory-foods.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600" class="card-img" alt="Micro Meditation">
+                <div class="card-body">
+                    <h3 class="card-title">Micro-Meditation</h3>
+                    <p>No time to meditate? Use this Navy SEAL breathing technique.</p>
+                    <a href="micro-meditation.html" class="read-link">Read Article &rarr;</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2025 MentalEdge. All rights reserved.</p>
         <p>
             <small>
-                <a href="about.html" style="color: #4db6ac; margin: 0 10px; text-decoration: none;">About Us</a> | 
-                <a href="contact.html" style="color: #4db6ac; margin: 0 10px; text-decoration: none;">Contact</a> | 
-                <a href="privacy.html" style="color: #4db6ac; margin: 0 10px; text-decoration: none;">Privacy Policy</a> | 
-                <a href="terms.html" style="color: #4db6ac; margin: 0 10px; text-decoration: none;">Terms of Service</a>
+                <a href="about.html">About Us</a> | 
+                <a href="contact.html">Contact</a> | 
+                <a href="privacy.html">Privacy Policy</a> | 
+                <a href="terms.html">Terms of Service</a>
             </small>
         </p>
     </footer>
