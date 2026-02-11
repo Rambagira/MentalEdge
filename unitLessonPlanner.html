@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editable Bulk Lesson Plan Generator</title>
+    <title>Smart Lesson Plan Generator</title>
     <style>
         /* --- CSS STYLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,7 +19,7 @@
         
         /* HEADER */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%); /* New Professional Color */
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
@@ -42,7 +42,7 @@
         .section-title {
             grid-column: 1 / -1;
             font-size: 1.2em;
-            color: #764ba2;
+            color: #2c3e50;
             margin: 20px 0 10px 0;
             border-bottom: 2px solid #eee;
             padding-bottom: 5px;
@@ -68,10 +68,10 @@
             width: 100%;
         }
         
-        input:focus, textarea:focus { border-color: #667eea; outline: none; }
+        input:focus, textarea:focus { border-color: #4ca1af; outline: none; }
         
         .generate-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #4ca1af 100%);
             color: white;
             padding: 15px 40px;
             border: none;
@@ -104,8 +104,8 @@
         }
 
         .edit-notice {
-            background: #fff3cd;
-            color: #856404;
+            background: #e1f5fe;
+            color: #0277bd;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 15px;
@@ -114,17 +114,22 @@
         }
 
         .btn {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
             margin: 0 5px;
             color: white;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .btn-print { background: #3b82f6; }
-        .btn-word { background: #10b981; }
+        .btn-word { background: #0078d4; } /* Word Blue */
+        .btn:hover { opacity: 0.9; }
 
         /* LESSON PLAN VISUALS (Your specific format) */
         .lesson-plan-wrapper {
@@ -162,8 +167,8 @@
 
     <div class="container">
         <div class="header">
-            <h1>🤖 Bulk Lesson Plan Generator</h1>
-            <p>Generate your whole unit at once. <strong>Edit anything</strong> before printing.</p>
+            <h1>📝 Smart Lesson Plan Generator</h1>
+            <p>Auto-detects materials and exports directly to Word.</p>
         </div>
 
         <div class="form-container">
@@ -256,10 +261,10 @@
 
         <div id="resultContainer" class="result-container">
             <div class="controls">
-                <div class="edit-notice">💡 <strong>Tip:</strong> Click anywhere on the plans below to edit text (Subject, Date, etc.) before printing!</div>
+                <div class="edit-notice">💡 <strong>Review:</strong> Click any text below to edit before downloading.</div>
                 <br>
-                <button class="btn btn-word" onclick="copyToWord()">📄 Copy to Word</button>
-                <button class="btn btn-print" onclick="window.print()">🖨️ Print to PDF</button>
+                <button class="btn btn-word" onclick="exportToWord()">💾 Download as Word (.doc)</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ Print / Save PDF</button>
             </div>
             
             <div id="masterOutput" contenteditable="true"></div>
@@ -274,7 +279,6 @@
         function getNextSchoolDay(currentDate) {
             let next = new Date(currentDate);
             next.setDate(next.getDate() + 1);
-            // If Sat(6) or Sun(0), keep adding days
             while (next.getDay() === 0 || next.getDay() === 6) {
                 next.setDate(next.getDate() + 1);
             }
@@ -286,6 +290,65 @@
             const month = String(d.getMonth() + 1).padStart(2, '0');
             const year = d.getFullYear();
             return `${day}/${month}/${year}`;
+        }
+
+        // --- SMART MATERIALS LOGIC ---
+        function predictMaterials(title, subject) {
+            let materials = "Textbooks, Manila paper, markers, chalkboard"; // Default
+            
+            const t = title.toLowerCase();
+            const s = subject.toLowerCase();
+
+            // MATH TOOLS
+            if (t.includes("geometry") || t.includes("shape") || t.includes("angle") || t.includes("construction") || t.includes("circle")) {
+                materials += ", geometric set, compass, protractor, ruler";
+            }
+            else if (t.includes("fraction") || t.includes("percentage") || t.includes("ratio")) {
+                materials += ", fraction charts, counters/objects";
+            }
+            else if (t.includes("graph") || t.includes("statistics") || t.includes("data")) {
+                materials += ", graph paper, ruler";
+            }
+            else if (t.includes("measure") || t.includes("length") || t.includes("distance")) {
+                materials += ", meter rule, tape measure";
+            }
+            else if (t.includes("money") || t.includes("currency")) {
+                materials += ", play money/currency notes";
+            }
+            else if (t.includes("time") || t.includes("clock")) {
+                materials += ", clock face model";
+            }
+
+            // SCIENCE TOOLS
+            if (s.includes("science") || s.includes("physics") || s.includes("chem") || s.includes("bio")) {
+                if (t.includes("plant") || t.includes("flower") || t.includes("leaf")) {
+                    materials += ", plant samples, magnifying glass";
+                }
+                else if (t.includes("light") || t.includes("mirror") || t.includes("optic")) {
+                    materials += ", mirrors, torch/light source";
+                }
+                else if (t.includes("magnet")) {
+                    materials += ", bar magnets, iron filings";
+                }
+                else if (t.includes("electric") || t.includes("circuit")) {
+                    materials += ", dry cells, wires, bulbs";
+                }
+                else if (t.includes("water") || t.includes("liquid")) {
+                    materials += ", beakers, water samples, transparent containers";
+                }
+            }
+
+            // GEOGRAPHY / SOCIAL STUDIES
+            if (t.includes("map") || t.includes("location") || t.includes("world") || t.includes("africa") || t.includes("rwanda")) {
+                materials += ", wall maps, atlas, globe";
+            }
+
+            // COMPUTING
+            if (s.includes("computer") || s.includes("ict") || t.includes("digital")) {
+                materials = "Computers/Laptops, projector, whiteboard"; // Replace default
+            }
+
+            return materials;
         }
 
         document.getElementById('lessonForm').addEventListener('submit', function(e) {
@@ -307,20 +370,20 @@
             const sne = document.getElementById('specialNeeds').value || "No specific needs identified.";
             const ref = document.getElementById('references').value || "Rwanda Education Board Curriculum.";
             
-            // Get Dates & Titles
             let currentDate = new Date(document.getElementById('startDate').value);
             let lessonNo = parseInt(document.getElementById('startLessonNo').value);
             
             const titlesRaw = document.getElementById('lessonTitlesList').value;
             const titles = titlesRaw.split('\n').filter(t => t.trim() !== '');
-            const totalLessons = titles.length + (lessonNo - 1); // rough estimate
+            const totalLessons = titles.length + (lessonNo - 1); 
 
             let htmlOutput = "";
 
-            // Loop through titles
             titles.forEach((title) => {
-                // Remove leading numbers (e.g. "1. Intro" -> "Intro")
                 const cleanTitle = title.replace(/^\d+[\.\)]\s*/, '');
+                
+                // Get smart materials
+                const smartMaterials = predictMaterials(cleanTitle, subject);
 
                 htmlOutput += `
                 <div class="lesson-plan-wrapper">
@@ -382,7 +445,7 @@
                             </tr>
                             <tr>
                                 <td class="bold">Learning Materials</td>
-                                <td>Textbooks, Manila paper, markers, chalkboard, geometric tools.</td>
+                                <td>${smartMaterials}</td>
                             </tr>
                             <tr>
                                 <td class="bold">References</td>
@@ -473,32 +536,45 @@
                     <div class="page-break"></div>
                 </div>`;
 
-                // Increment Loop
                 lessonNo++;
                 currentDate = getNextSchoolDay(currentDate);
             });
 
-            // Display Results
             document.getElementById('masterOutput').innerHTML = htmlOutput;
             const container = document.getElementById('resultContainer');
             container.classList.add('show');
             container.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function copyToWord() {
-            const content = document.getElementById('masterOutput');
-            const range = document.createRange();
-            range.selectNode(content);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            try {
-                document.execCommand('copy');
-                alert("✅ Copied! Open Word and paste (Ctrl+V).");
-            } catch (e) {
-                alert("Manual copy required.");
-            }
+        // --- EXPORT TO WORD LOGIC ---
+        function exportToWord() {
+            var content = document.getElementById('masterOutput').innerHTML;
+            
+            // Basic HTML wrapper for Word
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' " +
+                         "xmlns:w='urn:schemas-microsoft-com:office:word' " +
+                         "xmlns='http://www.w3.org/TR/REC-html40'>" +
+                         "<head><meta charset='utf-8'><title>Lesson Plans</title>" +
+                         "<style>" +
+                         "body { font-family: 'Times New Roman'; font-size: 11pt; }" +
+                         "table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }" +
+                         "td { border: 1px solid black; padding: 5px; vertical-align: top; }" +
+                         ".bold { font-weight: bold; }" +
+                         ".text-center { text-align: center; }" +
+                         ".page-break { page-break-after: always; }" +
+                         "</style></head><body>";
+            
+            var footer = "</body></html>";
+            var sourceHTML = header + content + footer;
+            
+            var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+            var fileDownload = document.createElement("a");
+            document.body.appendChild(fileDownload);
+            fileDownload.href = source;
+            fileDownload.download = 'Lesson_Plans.doc';
+            fileDownload.click();
+            document.body.removeChild(fileDownload);
         }
     </script>
 </body>
-
 </html>
