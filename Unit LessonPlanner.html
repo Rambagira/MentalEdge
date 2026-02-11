@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Bulk Lesson Plan Generator</title>
+    <style>
+        /* --- CSS STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            color: #333;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 { margin-bottom: 10px; }
+        
+        /* FORM CONTAINER */
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            grid-column: 1 / -1;
+            font-size: 1.2em;
+            color: #764ba2;
+            margin: 20px 0 10px 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        
+        label { font-weight: 600; margin-bottom: 5px; color: #555; font-size: 0.9em; }
+        label.required::after { content: " *"; color: red; }
+        
+        input, select, textarea {
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            width: 100%;
+        }
+        
+        input:focus, textarea:focus { border-color: #667eea; outline: none; }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .generate-btn:hover { transform: translateY(-2px); }
+        
+        /* OUTPUT AREA */
+        .result-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            display: none; /* Hidden by default */
+        }
+        
+        .result-container.show { display: block; }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .edit-notice {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: inline-block;
+            font-size: 0.9em;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 5px;
+            color: white;
+        }
+        
+        .btn-print { background: #3b82f6; }
+        .btn-word { background: #10b981; }
+
+        /* LESSON PLAN VISUALS (Your specific format) */
+        .lesson-plan-wrapper {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px dashed #ccc; /* Dashed border to show separation on screen */
+        }
+        
+        .lesson-plan {
+            font-family: 'Times New Roman', serif;
+            font-size: 11pt;
+            color: black;
+            line-height: 1.3;
+        }
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+        td { border: 1px solid black; padding: 4px 6px; vertical-align: top; }
+        .bold { font-weight: bold; }
+        ul { padding-left: 20px; margin: 5px 0; }
+        .text-center { text-align: center; }
+        
+        /* PRINT MODE */
+        @media print {
+            body { background: white; padding: 0; }
+            .header, .form-container, .controls, .edit-notice { display: none !important; }
+            .result-container { padding: 0; margin: 0; box-shadow: none; }
+            .lesson-plan-wrapper { border: none; padding: 0; margin: 0; }
+            .page-break { page-break-after: always; display: block; height: 1px; }
+            /* Hide the last break */
+            .lesson-plan-wrapper:last-child .page-break { page-break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Bulk Lesson Plan Generator</h1>
+            <p>Generate your whole unit at once. <strong>Edit anything</strong> before printing.</p>
+        </div>
+
+        <div class="form-container">
+            <form id="lessonForm">
+                <div class="form-grid">
+                    
+                    <h3 class="section-title">🏫 Class & Subject Details</h3>
+                    
+                    <div class="form-group">
+                        <label class="required">Subject</label>
+                        <input type="text" id="subject" placeholder="e.g. Mathematics" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Class</label>
+                        <input type="text" id="class" placeholder="e.g. P4" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Class Size</label>
+                        <input type="number" id="classSize" placeholder="e.g. 45" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Duration (min)</label>
+                        <input type="number" id="duration" value="40" required>
+                    </div>
+                    
+                    <h3 class="section-title">👤 Teacher Info</h3>
+
+                    <div class="form-group">
+                        <label class="required">School Name</label>
+                        <input type="text" id="schoolName" placeholder="e.g. G.S. Kigali" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Teacher's Name</label>
+                        <input type="text" id="teacherName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Term</label>
+                        <select id="term" required>
+                            <option value="I">Term I</option>
+                            <option value="II">Term II</option>
+                            <option value="III">Term III</option>
+                        </select>
+                    </div>
+
+                    <h3 class="section-title">📚 Unit Planning</h3>
+
+                    <div class="form-group">
+                        <label class="required">Unit No</label>
+                        <input type="number" id="unitNo" placeholder="e.g. 3" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="required">Unit Title</label>
+                        <input type="text" id="unitTitle" placeholder="e.g. Fractions" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Start Date</label>
+                        <input type="date" id="startDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Start Lesson No</label>
+                        <input type="number" id="startLessonNo" value="1" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="required">List of Lesson Titles (One per line)</label>
+                        <textarea id="lessonTitlesList" rows="6" placeholder="1. Introduction to topic&#10;2. Specific concepts&#10;3. Practice exercises&#10;4. Review and Assessment" required></textarea>
+                        <small style="color: #666;">Each line generates one full lesson plan.</small>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="optional">Special Needs / References</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <input type="text" id="specialNeeds" placeholder="Special Needs (Optional)">
+                            <input type="text" id="references" placeholder="References (Optional)">
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="generate-btn">✨ Generate Plans</button>
+            </form>
+        </div>
+
+        <div id="resultContainer" class="result-container">
+            <div class="controls">
+                <div class="edit-notice">💡 <strong>Tip:</strong> Click anywhere on the plans below to edit text (Subject, Date, etc.) before printing!</div>
+                <br>
+                <button class="btn btn-word" onclick="copyToWord()">📄 Copy to Word</button>
+                <button class="btn btn-print" onclick="window.print()">🖨️ Print to PDF</button>
+            </div>
+            
+            <div id="masterOutput" contenteditable="true"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set default date
+        document.getElementById('startDate').valueAsDate = new Date();
+
+        // --- WEEKEND SKIPPER LOGIC ---
+        function getNextSchoolDay(currentDate) {
+            let next = new Date(currentDate);
+            next.setDate(next.getDate() + 1);
+            // If Sat(6) or Sun(0), keep adding days
+            while (next.getDay() === 0 || next.getDay() === 6) {
+                next.setDate(next.getDate() + 1);
+            }
+            return next;
+        }
+
+        function formatDate(d) {
+            const day = String(d.getDate()).padStart(2, '0');
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const year = d.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        document.getElementById('lessonForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generatePlans();
+        });
+
+        function generatePlans() {
+            // Get Form Values
+            const school = document.getElementById('schoolName').value;
+            const teacher = document.getElementById('teacherName').value;
+            const term = document.getElementById('term').value;
+            const subject = document.getElementById('subject').value;
+            const className = document.getElementById('class').value;
+            const classSize = document.getElementById('classSize').value;
+            const duration = document.getElementById('duration').value;
+            const unitNo = document.getElementById('unitNo').value;
+            const unitTitle = document.getElementById('unitTitle').value;
+            const sne = document.getElementById('specialNeeds').value || "No specific needs identified.";
+            const ref = document.getElementById('references').value || "Rwanda Education Board Curriculum.";
+            
+            // Get Dates & Titles
+            let currentDate = new Date(document.getElementById('startDate').value);
+            let lessonNo = parseInt(document.getElementById('startLessonNo').value);
+            
+            const titlesRaw = document.getElementById('lessonTitlesList').value;
+            const titles = titlesRaw.split('\n').filter(t => t.trim() !== '');
+            const totalLessons = titles.length + (lessonNo - 1); // rough estimate
+
+            let htmlOutput = "";
+
+            // Loop through titles
+            titles.forEach((title) => {
+                // Remove leading numbers (e.g. "1. Intro" -> "Intro")
+                const cleanTitle = title.replace(/^\d+[\.\)]\s*/, '');
+
+                htmlOutput += `
+                <div class="lesson-plan-wrapper">
+                    <div class="lesson-plan">
+                        <div class="text-center bold" style="font-size: 14pt; margin-bottom: 10px; text-transform: uppercase;">Lesson Plan</div>
+                        
+                        <div style="margin-bottom: 5px; font-size: 11pt;">
+                            <span class="bold">School Name:</span> ${school}
+                            <span style="float: right;" class="bold">Teacher: ${teacher}</span>
+                        </div>
+
+                        <table>
+                            <tr style="background: #f0f0f0;">
+                                <td class="bold">Term</td>
+                                <td class="bold">Date</td>
+                                <td class="bold">Subject</td>
+                                <td class="bold">Class</td>
+                                <td class="bold">Unit N°</td>
+                                <td class="bold">Lesson N°</td>
+                                <td class="bold">Duration</td>
+                                <td class="bold">Class size</td>
+                            </tr>
+                            <tr>
+                                <td>${term}</td>
+                                <td>${formatDate(currentDate)}</td>
+                                <td>${subject}</td>
+                                <td>${className}</td>
+                                <td>${unitNo}</td>
+                                <td>${lessonNo} / ${totalLessons}</td>
+                                <td>${duration} min</td>
+                                <td>${classSize}</td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr>
+                                <td class="bold" style="width: 30%;">Special Educational Needs</td>
+                                <td>${sne}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Unit Title</td>
+                                <td>${unitTitle}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Key Unit Competence</td>
+                                <td>To use ${unitTitle} concepts in solving daily life problems.</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Title of the Lesson</td>
+                                <td>${cleanTitle}</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Instructional Objective</td>
+                                <td>By the end of the lesson, learners will be able to explain and apply concepts of <strong>${cleanTitle}</strong> correctly.</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Plan for this Class</td>
+                                <td>Classroom setting, learners arranged in mixed-ability groups.</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Learning Materials</td>
+                                <td>Textbooks, Manila paper, markers, chalkboard, geometric tools.</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">References</td>
+                                <td>${ref}</td>
+                            </tr>
+                        </table>
+
+                        <table>
+                            <tr style="background: #f0f0f0;">
+                                <td class="bold" style="width: 15%;">Timing</td>
+                                <td class="bold" style="width: 28%;">Teacher Activities</td>
+                                <td class="bold" style="width: 28%;">Learner Activities</td>
+                                <td class="bold" style="width: 29%;">Competences</td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Introduction<br>(5 min)</td>
+                                <td>
+                                    <ul>
+                                        <li>Greets the class.</li>
+                                        <li>Reviews the previous lesson.</li>
+                                        <li>Introduces the new topic: <em>${cleanTitle}</em>.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>Responding to greeting.</li>
+                                        <li>Answering review questions.</li>
+                                        <li>Listening to the new topic intro.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <strong>Communication:</strong> Speaking clearly.<br>
+                                    <strong>Critical Thinking:</strong> Recalling info.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Development<br>(${parseInt(duration)-15} min)</td>
+                                <td>
+                                    <ul>
+                                        <li>Explains the concept of ${cleanTitle} with examples.</li>
+                                        <li>Demonstrates the main activity on the board.</li>
+                                        <li>Assigns group work activities.</li>
+                                        <li>Supervises and assists groups.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>Observing the demonstration.</li>
+                                        <li>Working in groups.</li>
+                                        <li>Asking questions for clarification.</li>
+                                        <li>Presenting group findings.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <strong>Cooperation:</strong> Working in teams.<br>
+                                    <strong>Problem Solving:</strong> Solving tasks.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Conclusion<br>(10 min)</td>
+                                <td>
+                                    <ul>
+                                        <li>Asks learners to summarize key points.</li>
+                                        <li>Gives a short evaluation exercise.</li>
+                                        <li>Assigns homework on ${cleanTitle}.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>Summarizing the lesson.</li>
+                                        <li>Completing evaluation.</li>
+                                        <li>Copying homework into notebooks.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <strong>Self-management:</strong> Taking notes.<br>
+                                    <strong>Lifelong learning:</strong> Researching.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="bold">Self Evaluation</td>
+                                <td colspan="3" style="color: #888; height: 50px; font-style: italic;">
+                                    (Space for teacher to write comments after the lesson...)
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="page-break"></div>
+                </div>`;
+
+                // Increment Loop
+                lessonNo++;
+                currentDate = getNextSchoolDay(currentDate);
+            });
+
+            // Display Results
+            document.getElementById('masterOutput').innerHTML = htmlOutput;
+            const container = document.getElementById('resultContainer');
+            container.classList.add('show');
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToWord() {
+            const content = document.getElementById('masterOutput');
+            const range = document.createRange();
+            range.selectNode(content);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            try {
+                document.execCommand('copy');
+                alert("✅ Copied! Open Word and paste (Ctrl+V).");
+            } catch (e) {
+                alert("Manual copy required.");
+            }
+        }
+    </script>
+</body>
+</html>
